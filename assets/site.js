@@ -49,6 +49,7 @@
     var links = scope.querySelectorAll(".toc a[href^='#']");
     var map = {};
     links.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
+    if (links.length && !scope.querySelector(".toc a.active")) links[0].classList.add("active");
     observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;

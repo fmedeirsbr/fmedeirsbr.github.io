@@ -260,8 +260,33 @@ tr.star td:first-child::before { content: "★ "; color: var(--gold); }
 .site-footer p { margin: 0; color: var(--muted); font-size: 13px; }
 .social { display: flex; gap: 8px; }
 
+/* class guide rail (right side) */
+.wrap.has-rail { max-width: 1520px; }
+.page-grid { display: grid; grid-template-columns: minmax(0, 1fr) 236px; gap: 0 26px; align-items: start; }
+.page-grid > .content { grid-column: 1; grid-row: 1; min-width: 0; }
+.page-grid > .rail { grid-column: 2; grid-row: 1; position: sticky; top: calc(var(--header-h) + 18px); }
+.rail-box { background: var(--panel); border: var(--px) solid var(--border);
+  box-shadow: inset 2px 2px 0 var(--hi), inset -2px -2px 0 var(--lo), var(--shadow); padding-bottom: 8px; }
+.rail-title { padding: 8px 12px; background: var(--panel-3); border-bottom: 2px solid var(--border); font: 700 13px var(--font-ui);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.rail-item { display: flex; gap: 10px; align-items: flex-start; margin: 0 8px 8px; padding: 9px; text-decoration: none; color: var(--ink);
+  background: var(--panel-2); border: 2px solid var(--border); box-shadow: 3px 3px 0 var(--border); transition: transform .06s, box-shadow .06s; }
+.rail-item:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--border); }
+.rail-item[aria-current="page"] { background: var(--red); color: var(--on-red); }
+.rail-item[aria-current="page"] small { color: var(--on-red); opacity: .9; }
+.rail-item > .ico { width: 40px; height: 40px; background-color: var(--panel-3); border: 2px solid var(--border); background-size: 32px; }
+.rail-item b { display: block; font: 700 15px var(--font-ui); margin: 4px 0 2px; }
+.rail-item small { display: block; font-size: 12.5px; line-height: 1.35; color: var(--muted); }
+
 /* ---------- responsive ---------- */
-@media (max-width: 1400px) { .crumbs { display: none; } }
+@media (max-width: 1360px) {
+  .page-grid { display: block; }
+  .page-grid > .rail { position: static; margin-bottom: 18px; }
+  .rail-box { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; padding: 8px; }
+  .rail-title { display: none; }
+  .rail-item { margin: 0; flex: 1 1 240px; }
+}
+@media (max-width: 1100px) { .crumbs { display: none; } }
 @media (max-width: 960px) {
   .guide, .lang.on { display: block; }
   .guide > .toc, .lang.on > .toc { position: sticky; top: var(--header-h); z-index: 10; max-height: none; display: flex; overflow-x: auto; gap: 2px;
