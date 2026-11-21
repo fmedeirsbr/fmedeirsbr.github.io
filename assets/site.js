@@ -17,22 +17,40 @@
   window.toggleTheme = function () { var d = root.classList.toggle("dark"); store("theme", d ? "dark" : "light"); paintTheme(); };
 
   /* language (only on pages with .lang blocks) */
+  /* language: site-wide (UI strings via html[data-ui]) + guide bodies (.lang blocks) */
   var blocks = document.querySelectorAll(".lang");
+  var HTML_LANG = { en: "en", pt: "pt-BR", es: "es", zh: "zh-Hant" };
   window.setLang = function (l) {
-    if (!blocks.length || !document.getElementById("lang-" + l)) return;
+    if (!HTML_LANG[l]) return;
     cur = l;
+    root.setAttribute("data-ui", l);
+    root.lang = HTML_LANG[l];
     blocks.forEach(function (e) { e.classList.toggle("on", e.id === "lang-" + l); });
     document.querySelectorAll("[data-l]").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.l === l ? "true" : "false"); });
-    root.lang = document.getElementById("lang-" + l).getAttribute("lang");
     store("lang", l); paintTheme(); spy();
   };
-  if (blocks.length) {
+  (function () {
     var q = (location.search.match(/[?&]lang=(en|pt|es|zh)/) || location.hash.match(/^#(en|pt|es|zh)$/) || [])[1];
-    var l = q || read("lang");
+    var l = q || root.getAttribute("data-ui") || read("lang");
     if (!l) { var n = (navigator.language || "en").toLowerCase(); l = n.indexOf("pt") === 0 ? "pt" : n.indexOf("es") === 0 ? "es" : n.indexOf("zh") === 0 ? "zh" : "en"; }
-    setLang(l);
-  }
+    setTimeout(function () { setLang(l); }, 0);
+  })();
   paintTheme();
+
+  /* dropdowns: click to open (touch), Escape / outside click to close */
+  function closeAll(except) {
+    document.querySelectorAll(".dd.open").forEach(function (d) {
+      if (d === except) return; d.classList.remove("open"); var b = d.querySelector(":scope > .btn"); if (b) b.setAttribute("aria-expanded", "false");
+    });
+  }
+  document.querySelectorAll(".site-header .in .dd > .btn").forEach(function (b) {
+    b.addEventListener("click", function (e) {
+      e.stopPropagation(); var d = b.parentElement; var o = !d.classList.contains("open"); closeAll(d);
+      d.classList.toggle("open", o); b.setAttribute("aria-expanded", o ? "true" : "false");
+    });
+  });
+  document.addEventListener("click", function (e) { if (!e.target.closest || !e.target.closest(".dd")) closeAll(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(); });
 
   /* mobile menu */
   var mb = document.getElementById("menubtn");
