@@ -61,4 +61,24 @@
     Object.keys(map).forEach(function (id) { var s = document.getElementById(id); if (s) observer.observe(s); });
   }
   spy();
+
+  /* collapsible sections: click the red title bar to fold a window */
+  function setOpen(sec, open) {
+    sec.classList.toggle("collapsed", !open);
+    var h = sec.querySelector(":scope > h2"); if (h) h.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+  document.querySelectorAll("section[id] > h2").forEach(function (h) {
+    var sec = h.parentElement;
+    h.classList.add("toggle"); h.setAttribute("role", "button"); h.setAttribute("tabindex", "0"); h.setAttribute("aria-expanded", "true");
+    h.addEventListener("click", function () { setOpen(sec, sec.classList.contains("collapsed")); });
+    h.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setOpen(sec, sec.classList.contains("collapsed")); }
+    });
+  });
+  /* a menu link to a folded section opens it first */
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest && e.target.closest(".toc a[href^='#']"); if (!a) return;
+    var s = document.getElementById(a.getAttribute("href").slice(1));
+    if (s && s.classList.contains("collapsed")) setOpen(s, true);
+  });
 })();
