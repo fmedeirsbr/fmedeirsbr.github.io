@@ -486,7 +486,9 @@ tr.star td:first-child::before { content: "★ "; color: var(--gold); }
 .clsblock .section-title { font-size: 13px; margin: 0 0 10px; }
 .clsblock .cards { grid-template-columns: 1fr; }
 .card.soon { opacity: 1; border-style: solid; box-shadow: inset 2px 2px 0 var(--hi), inset -2px -2px 0 var(--lo), var(--shadow); }
-.card.soon .top.banner { filter: saturate(.75); }
+.card.soon .top.banner { filter: saturate(.55) brightness(.85); }
+.card.soon { opacity: .72; cursor: default; }
+.card.soon:hover { opacity: .9; transform: none; }
 .card.soon .go { color: var(--muted) !important; }
 @media (max-width: 720px) {
   .lvtabs { gap: 5px; padding: 8px 0; }
