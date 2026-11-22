@@ -78,6 +78,16 @@
     showLevel(ok(h) ? h : ok(saved) ? saved : "beginner", false);
   }
 
+  /* home: class bar scrolls to that class's card in the open difficulty */
+  document.querySelectorAll(".clschip").forEach(function (c) {
+    c.addEventListener("click", function () {
+      var panel = document.querySelector(".lvpanel:not([hidden])"); if (!panel) return;
+      var card = panel.querySelector('.card[data-cls="' + c.getAttribute("data-cls") + '"]'); if (!card) return;
+      card.scrollIntoView({ behavior: "smooth", block: "start" });
+      card.classList.remove("flash"); void card.offsetWidth; card.classList.add("flash");
+    });
+  });
+
   /* mobile menu */
   var mb = document.getElementById("menubtn");
   if (mb) mb.addEventListener("click", function () {

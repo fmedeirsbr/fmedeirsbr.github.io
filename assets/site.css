@@ -475,8 +475,8 @@ tr.star td:first-child::before { content: "★ "; color: var(--gold); }
 .rhm .tw th { font-size: 10px; letter-spacing: .4px; }
 
 /* home: sticky difficulty tabs + builds grouped by class */
-.lvtabs { position: sticky; top: var(--header-h); z-index: 30; display: flex; gap: 8px; padding: 10px 0; margin: 0 0 14px;
-  background: var(--bg); border-bottom: 2px solid var(--lo); }
+.homebar { position: sticky; top: var(--header-h); z-index: 30; background: var(--bg); border-bottom: 2px solid var(--lo); margin: 0 0 14px; }
+.lvtabs { display: flex; gap: 8px; padding: 10px 0 8px; }
 .lvtab { flex: 1 1 0; justify-content: center; padding: 10px 12px; font-size: 13px; gap: 8px; text-align: center; }
 .lvtab[aria-selected="true"] { background: var(--red); color: var(--on-red); }
 .dotlv { width: 10px; height: 10px; border: 2px solid var(--border); border-radius: 3px; flex: none; background: var(--muted); }
@@ -506,3 +506,23 @@ section, .card, .hero, .rail-box, .shot, .video { overflow: hidden; }
 .card .top { border-radius: calc(var(--radius) - 2px) calc(var(--radius) - 2px) 0 0; }
 .video iframe { border-radius: calc(var(--radius) - 3px); }
 .card .go { display: block; height: 20px; line-height: 20px; }
+
+/* home: class bar (icon + name on the class colours); click scrolls to that class's card */
+.clsbar { display: flex; gap: 6px; overflow-x: auto; padding: 0 0 10px; scrollbar-width: thin; }
+.clschip { flex: none; display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px 0 6px; cursor: pointer;
+  border: 2px solid var(--border); border-radius: var(--radius); background-size: cover; background-position: right center; image-rendering: pixelated;
+  color: #fff7ec; font: 700 13px var(--font-body); text-shadow: 1px 1px 0 rgba(0,0,0,.75); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), 2px 2px 0 rgba(0,0,0,.25); }
+.clschip .ico { width: 24px; height: 24px; background-size: contain; background-repeat: no-repeat; background-position: center; flex: none;
+  filter: drop-shadow(1px 1px 0 rgba(0,0,0,.6)); }
+.clschip span { white-space: nowrap; }
+.clschip:hover { filter: brightness(1.15); transform: translateY(-1px); }
+.clschip:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
+.card.flash { animation: cardflash 1.2s ease-out 1; }
+@keyframes cardflash { 0%, 30% { box-shadow: 0 0 0 4px var(--gold), var(--shadow); } 100% { box-shadow: inset 2px 2px 0 var(--hi), inset -2px -2px 0 var(--lo), var(--shadow); } }
+.clsgrid .card { scroll-margin-top: calc(var(--header-h) + 130px); }
+@media (max-width: 720px) {
+  .clschip { height: 32px; font-size: 12px; padding: 0 10px 0 5px; }
+  .clschip .ico { width: 20px; height: 20px; }
+  .clsgrid .card { scroll-margin-top: calc(var(--header-h) + 120px); }
+}
+@media (min-width: 721px) { .clsbar { flex-wrap: wrap; overflow: visible; } .clsgrid .card { scroll-margin-top: calc(var(--header-h) + 162px); } }
