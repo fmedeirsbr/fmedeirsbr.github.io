@@ -468,3 +468,8 @@ tr.star td:first-child::before { content: "★ "; color: var(--gold); }
   .tw td .ico { width: 22px; height: 22px; background-size: 20px; vertical-align: middle; }
   .tw td.n { white-space: nowrap; }
 }
+
+/* Right Hand Mastery box: compact table that never scrolls sideways */
+.rhm .tw table { width: 100%; }
+.rhm .tw th, .rhm .tw td { white-space: normal !important; padding: 6px 8px; }
+.rhm .tw th { font-size: 10px; letter-spacing: .4px; }
