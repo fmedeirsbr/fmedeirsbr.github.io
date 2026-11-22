@@ -525,4 +525,14 @@ section, .card, .hero, .rail-box, .shot, .video { overflow: hidden; }
   .clschip .ico { width: 20px; height: 20px; }
   .clsgrid .card { scroll-margin-top: calc(var(--header-h) + 120px); }
 }
-@media (min-width: 721px) { .clsbar { flex-wrap: wrap; overflow: visible; } .clsgrid .card { scroll-margin-top: calc(var(--header-h) + 162px); } }
+@media (min-width: 961px) { .clsbar { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); overflow: visible; } .clschip { font-size: 12px; } .clsgrid .card { scroll-margin-top: calc(var(--header-h) + 162px); } }
+/* class bar: equal-size buttons in a clean grid */
+.clschip { justify-content: flex-start; min-width: 0; }
+.clschip span { overflow: hidden; text-overflow: ellipsis; }
+@media (min-width: 961px) { .clschip { width: 100%; } }
+@media (min-width: 1180px) {
+  .clsbar { grid-template-columns: repeat(9, minmax(0, 1fr)); gap: 5px; }
+  .clschip { padding: 0 6px 0 5px; gap: 5px; font-size: 11.5px; }
+  .clschip .ico { width: 21px; height: 21px; }
+}
+@media (max-width: 960px) { .clschip { width: 158px; } }
