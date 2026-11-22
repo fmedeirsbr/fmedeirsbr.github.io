@@ -18,7 +18,7 @@
   --shadow: 4px 4px 0 rgba(42, 28, 17, .30);
   --px: 3px;
   --header-h: 64px;
-  --radius: 0;
+  --radius: 8px;
 }
 html.dark {
   --bg: #262624;   --bg-dot: #2d2d2b;
@@ -440,8 +440,8 @@ tr.star td:first-child::before { content: "★ "; color: var(--gold); }
 
 /* home cards: same height for every build (title up to 2 lines, summary up to 4) */
 .card .body p { line-height: 1.55; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
-.card .body p:first-child { -webkit-line-clamp: 2; line-clamp: 2; min-height: calc(2 * 1.55em); }
-.card .body p.muted { -webkit-line-clamp: 4; line-clamp: 4; min-height: calc(4 * 1.55em); }
+.card .body p:first-child { -webkit-line-clamp: 2; line-clamp: 2; height: calc(2 * 1.55em); }
+.card .body p.muted { -webkit-line-clamp: 4; line-clamp: 4; height: calc(4 * 1.55em); }
 
 .two.shots { align-items: start; } .two.shots .shot { margin: 0; }
 
@@ -473,3 +473,34 @@ tr.star td:first-child::before { content: "★ "; color: var(--gold); }
 .rhm .tw table { width: 100%; }
 .rhm .tw th, .rhm .tw td { white-space: normal !important; padding: 6px 8px; }
 .rhm .tw th { font-size: 10px; letter-spacing: .4px; }
+
+/* home: sticky difficulty tabs + builds grouped by class */
+.lvtabs { position: sticky; top: var(--header-h); z-index: 30; display: flex; gap: 8px; padding: 10px 0; margin: 0 0 14px;
+  background: var(--bg); border-bottom: 2px solid var(--lo); }
+.lvtab { flex: 1 1 0; justify-content: center; padding: 10px 12px; font-size: 13px; gap: 8px; text-align: center; }
+.lvtab[aria-selected="true"] { background: var(--red); color: var(--on-red); }
+.dotlv { width: 10px; height: 10px; border: 2px solid var(--border); border-radius: 3px; flex: none; background: var(--muted); }
+.dotlv.lv-beginner { background: var(--green); } .dotlv.lv-intermediate { background: var(--purple); } .dotlv.lv-advanced { background: var(--gold); }
+.lvpanel[hidden] { display: none; }
+.clsgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; align-items: start; }
+.clsblock .section-title { font-size: 13px; margin: 0 0 10px; }
+.clsblock .cards { grid-template-columns: 1fr; }
+.card.soon { opacity: 1; border-style: solid; box-shadow: inset 2px 2px 0 var(--hi), inset -2px -2px 0 var(--lo), var(--shadow); }
+.card.soon .top.banner { filter: saturate(.75); }
+.card.soon .go { color: var(--muted) !important; }
+@media (max-width: 720px) {
+  .lvtabs { gap: 5px; padding: 8px 0; }
+  .lvtab { padding: 8px 4px; font-size: 10px; gap: 5px; line-height: 1.35; min-width: 0; white-space: normal; }
+  .dotlv { display: none; }
+}
+
+/* rounded corners everywhere (light 8px) */
+.brand .logo, .dd-menu, .dd-item, .dd-item > .ico, .mpanel, .box, .slotframe, .steps li, .steps li::before, .tips li, .flow > span, .flow > div,
+.flow b, .npc, .npc .ico.portrait, .lock, .open, .tw, .rung, .stop, .pill, .g, .gh > .ico, .card .top .ico, .tag, .video, .shot, .shot img,
+.rail-box, .rail-item, .rail-item > .ico, .hero .ico.heroic, .hero > .ico, .toc a, .meter, .lvtab, .sub-btn { border-radius: var(--radius); }
+.pill, .tag, .lock, .open, .meter, .flow b, .steps li::before { border-radius: 6px; }
+.pill.x::before { border-radius: 5px 0 0 5px; }
+section, .card, .hero, .rail-box, .shot, .video { overflow: hidden; }
+.card .top { border-radius: calc(var(--radius) - 2px) calc(var(--radius) - 2px) 0 0; }
+.video iframe { border-radius: calc(var(--radius) - 3px); }
+.card .go { display: block; height: 20px; line-height: 20px; }

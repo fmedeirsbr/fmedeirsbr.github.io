@@ -62,6 +62,22 @@
   document.addEventListener("click", function (e) { if (!e.target.closest || !e.target.closest(".dd")) closeAll(); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeAll(); });
 
+  /* home: difficulty tabs (remembered; #beginner / #intermediate / #advanced also work) */
+  var lvtabs = document.querySelectorAll(".lvtab");
+  if (lvtabs.length) {
+    var showLevel = function (lv, push) {
+      lvtabs.forEach(function (t) { t.setAttribute("aria-selected", t.getAttribute("data-lv") === lv ? "true" : "false"); });
+      document.querySelectorAll(".lvpanel").forEach(function (p) { p.hidden = p.getAttribute("data-lv") !== lv; });
+      try { localStorage.setItem("homeLevel", lv); } catch (e) {}
+      if (push && history.replaceState) history.replaceState(null, "", "#" + lv);
+    };
+    lvtabs.forEach(function (t) { t.addEventListener("click", function () { showLevel(t.getAttribute("data-lv"), true); }); });
+    var h = (location.hash || "").replace("#", ""), saved = null;
+    try { saved = localStorage.getItem("homeLevel"); } catch (e) {}
+    var ok = function (v) { return v === "beginner" || v === "intermediate" || v === "advanced"; };
+    showLevel(ok(h) ? h : ok(saved) ? saved : "beginner", false);
+  }
+
   /* mobile menu */
   var mb = document.getElementById("menubtn");
   if (mb) mb.addEventListener("click", function () {
