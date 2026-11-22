@@ -1,4 +1,4 @@
-/* Midgard Survivors Guides — theme, language, sidebar scrollspy, mobile menu. No dependencies. */
+/* Midgard Survivors Guide — theme, language, sidebar scrollspy, mobile menu. No dependencies. */
 (function () {
   var root = document.documentElement;
   var LABEL = { en: ["Dark", "Light"], pt: ["Escuro", "Claro"], es: ["Oscuro", "Claro"], zh: ["深色", "淺色"] };
