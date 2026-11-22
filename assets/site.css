@@ -100,7 +100,7 @@ html[data-ui="es"] .tx[data-t="es"], html[data-ui="zh"] .tx[data-t="zh"] { displ
 .dd-item:hover, .dd-item:focus-visible { background: var(--panel-2); border-color: var(--border); }
 .dd-item > .ico { width: 36px; height: 36px; background-color: var(--panel-3); border: 2px solid var(--border); background-size: 28px; }
 .dd-item small { display: block; font: 400 12px var(--font-ui); color: var(--muted); text-transform: uppercase; letter-spacing: .6px; }
-.dd-item b { display: block; font-size: 14px; line-height: 1.3; }
+.dd-item b { display: block; font: 700 14px/1.3 var(--font-body); text-transform: none; letter-spacing: 0; }
 .dd-empty { padding: 10px; font: 400 13px var(--font-ui); color: var(--muted); }
 .mpanel { display: none; }
 
@@ -113,7 +113,11 @@ html[data-ui="es"] .tx[data-t="es"], html[data-ui="zh"] .tx[data-t="zh"] { displ
 .lang-item b { font-size: 14px; }
 .lang-item[aria-pressed="true"] { background: var(--red); color: var(--on-red); border-color: var(--border); }
 .lang-item[aria-pressed="true"] .code { background: var(--panel); color: var(--ink); }
-.mpanel .lang-dd { width: 100%; } .mpanel .lang-dd > .btn { width: 100%; justify-content: space-between; }
+.mpanel .mrow { align-items: flex-start; }
+.mpanel .mrow .langs { flex: 1 1 100%; }
+.mpanel .lang-dd { width: 100%; } .mpanel .lang-dd > .btn { display: none; }
+.mpanel .lang-dd .dd-menu { display: grid !important; grid-template-columns: 1fr 1fr; gap: 6px; margin: 0; padding: 6px; }
+.mpanel .lang-item { padding: 6px; }
 
 /* ---------- page layout ---------- */
 .wrap { max-width: 1240px; width: 100%; margin: 0 auto; padding: 22px 16px 40px; flex: 1; }
