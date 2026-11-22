@@ -320,7 +320,7 @@ tr.star td:first-child::before { content: "★ "; color: var(--gold); }
 .two.prio { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); align-items: start; }
 .two.prio td:nth-child(2) { white-space: nowrap; }
 .two.prio th { white-space: normal; }
-@media (max-width: 1100px) { .two.prio { grid-template-columns: 1fr; } }
+@media (max-width: 1100px) { .two.prio { grid-template-columns: minmax(0, 1fr); } }
 .two.prio td .ico { vertical-align: middle; }
 .two.prio h3:first-child { margin-top: 0; }
 
@@ -399,7 +399,7 @@ tr.star td:first-child::before { content: "★ "; color: var(--gold); }
   .brand .name small { display: none; } .brand .name { font-size: 11px; }
   .tools .social, .tools .langs { display: none; }
   .mpanel .mrow { display: flex; }
-  .two, .two.prio { grid-template-columns: 1fr; }
+  .two, .two.prio { grid-template-columns: minmax(0, 1fr); }
   section { padding: 0 14px 14px; } section > h2 { margin: 0 -14px 14px; font-size: 13px; }
   .hero { padding: 16px; } .hero .ico.heroic, .hero > .ico { width: 56px; height: 56px; background-size: 44px; }
   .rung { flex-direction: column; align-items: flex-start; gap: 4px; }
@@ -416,4 +416,24 @@ tr.star td:first-child::before { content: "★ "; color: var(--gold); }
 @media print {
   html { background: #fff; } .site-header, .site-footer, .toc, .crumbs { display: none !important; }
   .guide, .lang.on { display: block; } section, .hero { box-shadow: none; break-inside: avoid-page; }
+}
+
+/* phones: Home + Builds, language, theme and socials stay in the header (no hamburger) */
+@media (max-width: 720px) {
+  .compactnav { display: flex; margin-left: 2px; gap: 4px; }
+  .menu-btn, .site-header.open .mpanel { display: none !important; }
+  .tools .social, .tools .langs { display: flex; }
+  .site-header .tools { gap: 4px; }
+  .site-header .in .btn { padding: 5px 7px; font-size: 10px; }
+  .site-header .in .btn.icon { padding: 5px; }
+  .lang-dd > .btn .caret { display: none; }
+  .builds-dd > .dd-menu { position: fixed; left: 8px; right: 8px; top: calc(var(--header-h) - 4px); min-width: 0; max-height: calc(100vh - var(--header-h) - 12px); overflow: auto; }
+  .sub > .dd-menu { position: static; margin: 4px 0 6px; min-width: 0; box-shadow: none; }
+  .sub > .dd-menu::before { display: none; }
+  .sub-btn .caret { transform: rotate(90deg); }
+}
+@media (max-width: 400px) {
+  .site-header .in { gap: 4px; padding: 0 6px; }
+  .site-header .in .btn { padding: 5px 5px; }
+  .lang-dd > .btn svg:first-child { display: none; }
 }
