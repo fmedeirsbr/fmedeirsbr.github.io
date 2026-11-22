@@ -437,3 +437,8 @@ tr.star td:first-child::before { content: "★ "; color: var(--gold); }
   .site-header .in .btn { padding: 5px 5px; }
   .lang-dd > .btn svg:first-child { display: none; }
 }
+
+/* home cards: same height for every build (title up to 2 lines, summary up to 4) */
+.card .body p { line-height: 1.55; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+.card .body p:first-child { -webkit-line-clamp: 2; line-clamp: 2; min-height: calc(2 * 1.55em); }
+.card .body p.muted { -webkit-line-clamp: 4; line-clamp: 4; min-height: calc(4 * 1.55em); }
