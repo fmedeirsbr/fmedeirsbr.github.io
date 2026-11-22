@@ -298,6 +298,13 @@ tr.star td:first-child::before { content: "★ "; color: var(--gold); }
 .level-col .cards { grid-template-columns: 1fr; }
 @media (max-width: 900px) { .levels { grid-template-columns: 1fr; } }
 
+/* card banners: pixel scenes made from the game's sprites */
+.card .top.banner { min-height: 128px; align-items: flex-end; image-rendering: pixelated;
+  background-color: var(--panel-3); background-repeat: no-repeat; background-position: 0 0, right bottom; background-size: auto, cover; }
+.card .top.banner h3 { color: #fff7ec; text-shadow: 2px 2px 0 rgba(0, 0, 0, .7); }
+.card .top.banner .ico { box-shadow: 2px 2px 0 rgba(0, 0, 0, .45); }
+.card:hover .top.banner { filter: saturate(1.08) brightness(1.04); }
+
 /* footer */
 .site-footer { border-top: var(--px) solid var(--border); background: var(--panel); margin-top: 20px; }
 .site-footer .in { max-width: 1240px; margin: 0 auto; padding: 18px 16px; display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
