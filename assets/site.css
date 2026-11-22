@@ -444,3 +444,27 @@ tr.star td:first-child::before { content: "★ "; color: var(--gold); }
 .card .body p.muted { -webkit-line-clamp: 4; line-clamp: 4; min-height: calc(4 * 1.55em); }
 
 .two.shots { align-items: start; } .two.shots .shot { margin: 0; }
+
+/* phones: skill targets table becomes stacked rows (name + target, then the reason); no meter bar */
+@media (max-width: 720px) {
+  .skilltbl thead { display: none; }
+  .skilltbl, .skilltbl tbody { display: block; }
+  .skilltbl tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 10px; padding: 10px 12px; }
+  .skilltbl td { display: block; padding: 0; border: 0; background: none !important; }
+  .skilltbl tr + tr { border-top: 2px solid var(--lo); }
+  .skilltbl tr:nth-child(even) { background: var(--panel-2); }
+  .skilltbl td.sk { display: flex; align-items: center; gap: 8px; }
+  .skilltbl td.sk .ico { flex: none; }
+  .skilltbl td.n { text-align: right; white-space: nowrap; }
+  .skilltbl td.bar { display: none; }
+  .skilltbl td.whyc { grid-column: 1 / -1; font-size: 14px; line-height: 1.5; color: var(--muted); }
+}
+
+/* phones: every table fits the screen width (no sideways dragging) */
+@media (max-width: 720px) {
+  .tw table { width: 100%; min-width: 0; }
+  .tw th, .tw td { white-space: normal !important; padding: 6px 5px; font-size: 13px; overflow-wrap: anywhere; }
+  .tw th { font-size: 9px; letter-spacing: .3px; }
+  .tw td .ico { width: 22px; height: 22px; background-size: 20px; vertical-align: middle; }
+  .tw td.n { white-space: nowrap; }
+}
