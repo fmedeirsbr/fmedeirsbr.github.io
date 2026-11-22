@@ -40,6 +40,7 @@
 
   /* dropdowns: click to open (touch), Escape / outside click to close */
   function closeAll(except) {
+    document.querySelectorAll(".sub.open").forEach(function (s) { s.classList.remove("open"); });
     document.querySelectorAll(".dd.open").forEach(function (d) {
       if (d === except) return; d.classList.remove("open"); var b = d.querySelector(":scope > .btn"); if (b) b.setAttribute("aria-expanded", "false");
     });
@@ -48,6 +49,14 @@
     b.addEventListener("click", function (e) {
       e.stopPropagation(); var d = b.parentElement; var o = !d.classList.contains("open"); closeAll(d);
       d.classList.toggle("open", o); b.setAttribute("aria-expanded", o ? "true" : "false");
+    });
+  });
+  /* Builds flyouts: click/tap opens one difficulty (hover does it on desktop) */
+  document.querySelectorAll(".sub-btn").forEach(function (b) {
+    b.addEventListener("click", function (e) {
+      e.stopPropagation(); var s = b.parentElement; var o = !s.classList.contains("open");
+      s.parentElement.querySelectorAll(".sub.open").forEach(function (x) { x.classList.remove("open"); x.firstElementChild.setAttribute("aria-expanded", "false"); });
+      s.classList.toggle("open", o); b.setAttribute("aria-expanded", o ? "true" : "false");
     });
   });
   document.addEventListener("click", function (e) { if (!e.target.closest || !e.target.closest(".dd")) closeAll(); });

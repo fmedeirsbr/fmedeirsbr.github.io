@@ -324,6 +324,25 @@ tr.star td:first-child::before { content: "★ "; color: var(--gold); }
 .two.prio td .ico { vertical-align: middle; }
 .two.prio h3:first-child { margin-top: 0; }
 
+/* medium screens: Builds dropdown with a flyout per difficulty */
+.compactnav { display: none; align-items: center; gap: 6px; margin-left: 8px; }
+.compactnav .btn[aria-current] { background: var(--red); color: var(--on-red); }
+.builds-dd > .dd-menu { min-width: 210px; }
+.sub { position: relative; }
+.sub-btn { width: 100%; justify-content: space-between; background: none; cursor: pointer; text-align: left; font: inherit; }
+.sub-btn b { font: 400 12px var(--font-ui) !important; text-transform: uppercase; letter-spacing: .6px; }
+.sub-btn[aria-current] b { color: var(--red); }
+.sub-btn .caret { width: 10px; height: 10px; flex: none; }
+.sub > .dd-menu { top: -8px; left: calc(100% + 8px); }
+.sub > .dd-menu::before { left: -12px; right: auto; top: 0; bottom: 0; width: 12px; height: auto; }
+.sub.open > .dd-menu { display: block; }
+.sub.open > .sub-btn, .sub:hover > .sub-btn { background: var(--panel-2); border-color: var(--border); }
+@media (hover: hover) { .compactnav .sub:hover > .dd-menu { display: block; } }
+@media (min-width: 721px) and (max-width: 1200px) {
+  .compactnav { display: flex; }
+  .menu-btn { display: none !important; }
+}
+
 /* footer */
 .site-footer { border-top: var(--px) solid var(--border); background: var(--panel); margin-top: 20px; }
 .site-footer .in { max-width: 1240px; margin: 0 auto; padding: 18px 16px; display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
