@@ -28,6 +28,7 @@
     blocks.forEach(function (e) { e.classList.toggle("on", e.id === "lang-" + l); });
     document.querySelectorAll("[data-l]").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.l === l ? "true" : "false"); });
     store("lang", l); paintTheme(); spy();
+    if (typeof closeAll === "function") closeAll();
   };
   (function () {
     var q = (location.search.match(/[?&]lang=(en|pt|es|zh)/) || location.hash.match(/^#(en|pt|es|zh)$/) || [])[1];
@@ -43,7 +44,7 @@
       if (d === except) return; d.classList.remove("open"); var b = d.querySelector(":scope > .btn"); if (b) b.setAttribute("aria-expanded", "false");
     });
   }
-  document.querySelectorAll(".site-header .in .dd > .btn").forEach(function (b) {
+  document.querySelectorAll(".site-header .in .dd > .btn, .mpanel .lang-dd > .btn").forEach(function (b) {
     b.addEventListener("click", function (e) {
       e.stopPropagation(); var d = b.parentElement; var o = !d.classList.contains("open"); closeAll(d);
       d.classList.toggle("open", o); b.setAttribute("aria-expanded", o ? "true" : "false");

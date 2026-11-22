@@ -104,6 +104,17 @@ html[data-ui="es"] .tx[data-t="es"], html[data-ui="zh"] .tx[data-t="zh"] { displ
 .dd-empty { padding: 10px; font: 400 13px var(--font-ui); color: var(--muted); }
 .mpanel { display: none; }
 
+/* language dropdown */
+.lang-dd > .btn svg:first-child { width: 16px; height: 16px; }
+.lang-dd .dd-menu { left: auto; right: 0; min-width: 200px; }
+.lang-item { width: 100%; background: none; font: inherit; cursor: pointer; text-align: left; }
+.lang-item .code { display: inline-grid; place-items: center; min-width: 34px; height: 26px; padding: 0 4px; font: 400 12px var(--font-ui);
+  background: var(--panel-3); border: 2px solid var(--border); }
+.lang-item b { font-size: 14px; }
+.lang-item[aria-pressed="true"] { background: var(--red); color: var(--on-red); border-color: var(--border); }
+.lang-item[aria-pressed="true"] .code { background: var(--panel); color: var(--ink); }
+.mpanel .lang-dd { width: 100%; } .mpanel .lang-dd > .btn { width: 100%; justify-content: space-between; }
+
 /* ---------- page layout ---------- */
 .wrap { max-width: 1240px; width: 100%; margin: 0 auto; padding: 22px 16px 40px; flex: 1; }
 .guide, .lang.on { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 0 26px; align-items: start; }
